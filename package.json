@@ -1,0 +1,22 @@
+{
+  "name": "rt_lite",
+  "version": "1.0.0",
+  "description": "A lightweight RottenTomatoes client",
+  "main": "index.js",
+  "keywords": [
+    "rotten",
+    "tomatoes",
+    "movies",
+    "television",
+    "tv",
+    "ratings"
+  ],
+  "author": "Gabriel Benson",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "express": "^4.15.2",
+    "nunjucks": "^3.0.0",
+    "request": "^2.81.0",
+    "stylus": "^0.54.5"
+  }
+}
