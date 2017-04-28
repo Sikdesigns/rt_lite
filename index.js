@@ -4,7 +4,6 @@ const nunjucks = require('nunjucks');
 const stylus = require('stylus');
 const path = require('path');
 const request = require('request');
-const cheerio = require('cheerio');
 const app = express();
 
 // Turn on stylus autocompiling
