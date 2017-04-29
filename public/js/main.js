@@ -6,7 +6,11 @@ $(document).ready(function () {
 			$.get('/film/' + $('input[name=search]').val(), function (data) {
 				$('main').html(data);
 			});
-			$('main').html('<p>Fetching...</p>');
+			$('main').html('<p class="fetching">Fetching...</p>');
 		}
 	});
+});
+
+$(document).on('load', 'div.card-image img', function () {
+	console.log($(this).attr('title'));
 });
