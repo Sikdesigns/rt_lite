@@ -7,16 +7,30 @@ const request = require('request');
 const async = require('async');
 const fs = require('fs');
 const app = express();
+const apiKeyPath = path.join(__dirname, '/api.key');
+const tmdbJSON = path.join(__dirname, '/moviedb.json');
 
 // Set up themoviedb
-const apiKey = fs.readFileSync('api.key').toString().replace(/\r?\n|\r/g, '');
-const moviedbConfig = JSON.parse(fs.readFileSync('moviedb.json'));
-request('https://api.themoviedb.org/3/configuration?api_key=' + apiKey, (err, response, data) => {
-	if (!err && response.statusCode === 200) {
-		fs.writeFile('moviedb.json', data, (err) => {
-			if (err) console.log(new Error(err));
-		});
+if (!fs.existsSync(apiKeyPath)) {
+	console.log('API key file not found.  Please save your TMDb api key in a file called "api.key" at the root of the project.');
+	process.exit(1);
+}
+const moviedb = require('moviedb')(fs.readFileSync(apiKeyPath).toString().replace(/\r?\n|\r/g, ''));
+var tmdbConfig;
+fs.readFile(tmdbJSON, (err, data) => {
+	if (!err) {
+		tmdbConfig = JSON.parse(data);
 	}
+	moviedb.configuration((err, config) => {
+		if (!err) {
+			console.log(new Error(err));
+		} else {
+			tmdbConfig = config;
+			fs.writeFile(tmdbJSON, data, (err) => {
+				if (err) console.log(new Error(err));
+			});
+		}
+	});
 });
 
 // Turn on stylus autocompiling

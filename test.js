@@ -1,3 +1,5 @@
-const materializecss = require('materialize-css');
+var test;
 
-console.log(materializecss);
+test = 'monkey';
+
+if (test) console.log('yep');
