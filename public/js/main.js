@@ -6,7 +6,7 @@ $(document).ready(function () {
 			$.get('/film/' + $('input[name=search]').val(), function (data) {
 				$('main').html(data);
 			});
-			$('main').html('<p class="fetching">Fetching...</p>');
+			$('main').html('<p class="fetching">Calling Rotten Tomatoes...</p>');
 		}
 	});
 });
