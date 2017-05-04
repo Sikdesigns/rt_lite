@@ -38,27 +38,21 @@ html, body
 				background: -webkit-linear-gradient(to right, gray-darken, gray);  /* Chrome 10-25, Safari 5.1-6 */
 				background: linear-gradient(to right, gray-darken, gray); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 			div.card-image
+				// img
+				// 	height: 100%
+				// 	width: 200px !important
 				span.card-title
 					font-size: 3rem
 					line-height: 3rem
 					font-weight: bold
 			div.card-content
 				display: flex
-				div.left-content, div.right-content
-					display: flex
+				justify-content: space-between
+				width: 100%
+				span
+					display: flex !important
 					flex-direction: column
 					justify-content: center
-				div.left-content
-					width: 70%
-					text-align: left
-				div.right-content
-					width: 30%
-					text-align: right
-					span.movie-score
+					&.movie-score
 						font-size: 3rem
 						font-weight: bold
-						&:hover
-							cursor: pointer
-			div.card-reveal
-				p
-					font-size: .75rem

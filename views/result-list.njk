@@ -1,24 +1,25 @@
-<div class="row">
-	{% for movie in movies %}
-		<div class="col s12 l6 xl3">
-			<div class="card small {{ movie.meterClass if movie.meterClass !== "N/A" else "no-consensus" }}">
+{% for movie in movies | sort(true, false, "popularity") %}
+	<div class="row">
+		<div class="col s12 l6 xl4 offset-l3 offset-xl4">
+			<div class="card horizontal {{ movie.meterClass if movie.meterClass !== "N/A" else "no-consensus" }}">
 				<div class="card-image waves-effect waves-block waves-light">
-					<img class="activator" src="/images/grey.png" title="{{ movie.name }}"/>
-					{# <a class="btn-floating btn-large halfway-fab waves-effect waves-light grey">{{ movie.meterScore }}</a> #}
-					{# <span class="card-title">{{ movie.meterScore }}</span> #}
+					{# <img class="activator" src="{{ movie.image if movie.image else "/images/grey.png" }}" title="{{ movie.name }}" /> #}
+					<img class="activator" src="{{ movie.posterURL if movie.posterURL else "/images/grey.png" }}" title="{{ movie.name }}" />
 				</div>
 				<div class="card-content">
-					<div class="left-content">
+					<span class="card-title white-text text-darken-4">{{ movie.name }} ({{ movie.year }})</span>
+					<span class="movie-score white-text text-darken-4">{{ movie.meterScore }}</span>
+					{# <div class="left-content">
 						<span class="card-title activator white-text text-darken-4">{{ movie.name }} ({{ movie.year }})</span>
 					</div>
 					<div class="right-content">
 						<span class="movie-score activator white-text text-darken-4">{{ movie.meterScore }}</span>
-					</div>
+					</div> #}
 				</div>
-				<div class="card-reveal">
+				{# <div class="card-reveal">
 					<span class="card-title grey-text text-darken-4">{{ movie.name }} ({{ movie.year }})<i class="material-icons right">close</i></span>
 					<p>{{ movie.overview }}</p>
-				</div>
+				</div> #}
 			</div>
 			{# <a href="https://rottentomatoes.com{{ movie.url }}">
 				<li class="{{ movie.meterClass if movie.meterClass != 'N/A' else "no-consensus" }}">
@@ -27,5 +28,5 @@
 				</li>
 			</a> #}
 		</div>
-	{% endfor %}
-</div>
+	</div>
+{% endfor %}
