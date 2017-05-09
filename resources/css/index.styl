@@ -18,14 +18,16 @@ html, body
 		h1
 			text-align: center
 	main
-		p.fetching
+		div.row
+			margin-bottom: 0 !important
+		p.center
 			text-align: center
 		.card
-			&.certified_fresh
-				background: amber;  /* fallback for old browsers */
-				background: -webkit-linear-gradient(to right, amber-darken, amber);  /* Chrome 10-25, Safari 5.1-6 */
-				background: linear-gradient(to right, amber-darken, amber); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-			&.fresh
+			// &.certified_fresh
+			// 	background: amber;  /* fallback for old browsers */
+			// 	background: -webkit-linear-gradient(to right, green-darken, amber);  /* Chrome 10-25, Safari 5.1-6 */
+			// 	background: linear-gradient(to right, green-darken, amber); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+			&.fresh, &.certified_fresh
 				background: green;  /* fallback for old browsers */
 				background: -webkit-linear-gradient(to right, green-darken, green);  /* Chrome 10-25, Safari 5.1-6 */
 				background: linear-gradient(to right, green-darken, green); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -38,9 +40,10 @@ html, body
 				background: -webkit-linear-gradient(to right, gray-darken, gray);  /* Chrome 10-25, Safari 5.1-6 */
 				background: linear-gradient(to right, gray-darken, gray); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 			div.card-image
-				// img
-				// 	height: 100%
-				// 	width: 200px !important
+				display: flex
+				flex-direction: column
+				justify-content: center
+				padding-left: 1rem
 				span.card-title
 					font-size: 3rem
 					line-height: 3rem
@@ -54,5 +57,6 @@ html, body
 					flex-direction: column
 					justify-content: center
 					&.movie-score
+						margin-left: 1rem
 						font-size: 3rem
 						font-weight: bold
