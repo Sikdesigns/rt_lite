@@ -22,11 +22,8 @@ html, body
 			margin-bottom: 0 !important
 		p.center
 			text-align: center
-		.card
-			// &.certified_fresh
-			// 	background: amber;  /* fallback for old browsers */
-			// 	background: -webkit-linear-gradient(to right, green-darken, amber);  /* Chrome 10-25, Safari 5.1-6 */
-			// 	background: linear-gradient(to right, green-darken, amber); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		div.card
+			min-height: 6.9rem
 			&.fresh, &.certified_fresh
 				background: green;  /* fallback for old browsers */
 				background: -webkit-linear-gradient(to right, green-darken, green);  /* Chrome 10-25, Safari 5.1-6 */
@@ -44,6 +41,9 @@ html, body
 				flex-direction: column
 				justify-content: center
 				padding-left: 1rem
+				img
+					max-width: 2.3rem
+					max-height: 3.25rem
 				span.card-title
 					font-size: 3rem
 					line-height: 3rem

@@ -1,32 +1,17 @@
 {% for movie in movies | sort(true, false, "popularity") %}
 	<div class="row">
 		<div class="col s12 l6 xl4 offset-l3 offset-xl4">
-			<div class="card horizontal {{ movie.meterClass if movie.meterClass !== "N/A" else "no-consensus" }}">
-				<div class="card-image">
-					<img src="{{ movie.image if movie.image else "/images/grey.png" }}" title="{{ movie.name }}" />
-					{# <img class="activator" src="{{ movie.posterURL if movie.posterURL else "/images/grey.png" }}" title="{{ movie.name }}" /> #}
-				</div>
-				<div class="card-content">
-					<span class="card-title white-text text-darken-4">{{ movie.name }} ({{ movie.year }})</span>
-					<span class="movie-score white-text text-darken-4">{{ movie.meterScore }}</span>
-					{# <div class="left-content">
-						<span class="card-title activator white-text text-darken-4">{{ movie.name }} ({{ movie.year }})</span>
+			<a href="https://www.rottentomatoes.com{{ movie.url }}">
+				<div class="card horizontal waves-effect waves-block waves-light {{ movie.meterClass if movie.meterClass !== "N/A" else "no-consensus" }}">
+					<div class="card-image">
+						<img src="{{ movie.image if movie.image else "/images/grey.png" }}" title="{{ movie.name }}" />
 					</div>
-					<div class="right-content">
-						<span class="movie-score activator white-text text-darken-4">{{ movie.meterScore }}</span>
-					</div> #}
+					<div class="card-content">
+						<span class="card-title white-text text-darken-4">{{ movie.name }} ({{ movie.year }})</span>
+						<span class="movie-score white-text text-darken-4">{{ movie.meterScore }}</span>
+					</div>
 				</div>
-				{# <div class="card-reveal">
-					<span class="card-title grey-text text-darken-4">{{ movie.name }} ({{ movie.year }})<i class="material-icons right">close</i></span>
-					<p>{{ movie.overview }}</p>
-				</div> #}
-			</div>
-			{# <a href="https://rottentomatoes.com{{ movie.url }}">
-				<li class="{{ movie.meterClass if movie.meterClass != 'N/A' else "no-consensus" }}">
-					<span>{{ movie.name }} ({{ movie.year }})</span>
-					<span>{{ movie.meterScore if movie.meterScore else 'No Consensus Yet' }}</span>
-				</li>
-			</a> #}
+			</a>
 		</div>
 	</div>
 {% endfor %}
