@@ -45,7 +45,6 @@ app.get('/', (req, res) => {
 });
 
 app.get('/film/:searchTerms', (req, res) => {
-	console.log(req.url);
 	const searchTerms = req.params.searchTerms.replace(/%20/g, ' ');
 	request.get(rtURL + req.url.substring(6), { timeout: 5000 }, (err, response, html) => {
 		if (err || response.statusCode !== 200) {
@@ -67,11 +66,12 @@ app.get('/film/:searchTerms', (req, res) => {
 
 app.get('/css/normalize.css', (req, res) => {
 	// res.redirect('https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
-	require('fs').createReadStream('./node_modules/normalize.css/normalize.css').pipe(res);
+	res.sendFile(path.join(__dirname, '/node_modules/normalize.css/normalize.css'));
 });
 
 app.get('/:extension(css|js)/materialize.*', (req, res) => {
-	require('fs').createReadStream(path.join(__dirname, '/node_modules/materialize-css/bin/materialize.' + req.params.extension)).pipe(res);
+	res.sendFile(path.join(__dirname, '/node_modules/materialize-css/bin/materialize.' + req.params.extension));
+	// require('fs').createReadStream(path.join(__dirname, '/node_modules/materialize-css/bin/materialize.' + req.params.extension)).pipe(res);
 });
 
 // Turn on listening
