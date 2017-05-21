@@ -64,9 +64,13 @@ app.get('/film/:searchTerms', (req, res) => {
 	});
 });
 
-app.get('/css/normalize.css', (req, res) => {
+app.get('/css/normalize.min.css', (req, res) => {
 	// res.redirect('https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
 	res.sendFile(path.join(__dirname, '/node_modules/normalize.css/normalize.css'));
+});
+
+app.get('/js/jquery.min.js', (req, res) => {
+	res.sendFile(path.join(__dirname, '/node_modules/jquery/dist/jquery.min.js'));
 });
 
 app.get('/:extension(css|js)/materialize.*', (req, res) => {
