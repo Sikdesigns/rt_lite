@@ -3,9 +3,9 @@
 		<div class="col s12 l6 xl4 offset-l3 offset-xl4">
 			<a href="https://www.rottentomatoes.com{{ movie.url }}">
 				<div class="card horizontal waves-effect waves-block waves-light {{ movie.meterClass if movie.meterClass !== "N/A" else "no-consensus" }}">
-					<div class="card-image">
+					{# <div class="card-image">
 						<img src="{{ movie.image if movie.image else "/images/grey.png" }}" title="{{ movie.name }}" />
-					</div>
+					</div> #}
 					<div class="card-content">
 						<span class="card-title white-text text-darken-4">{{ movie.name }} ({{ movie.year }})</span>
 						<span class="movie-score white-text text-darken-4">{{ movie.meterScore }}</span>
