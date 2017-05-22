@@ -1,33 +1,10 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<title>{{ site.title }}</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="stylesheet" href="{{ site.url }}css/normalize.min.css" />
-		{# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css" /> #}
-		{# <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700" rel="stylesheet">
-		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> #}
-		<link type="text/css" rel="stylesheet" href="{{ site.url }}css/materialize.css" media="screen,projection"/>
-		{# <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css" media="screen,projection"/> #}
-		<link rel="stylesheet" href="{{ site.url }}css/index.css" />
-	</head>
-	<body>
-		<header>
-			<h1>rt_lite</h1>
-			{# <h2>"Not affiliated with Rotten Tomatoes!"</h2> #}
-		</header>
-		<div class="row">
-			<div class="col s12 l6 xl4 offset-l3 offset-xl4">
-				<input type="text" name="search" placeholder='"planet of the apes"' autofocus />
-			</div>
-		</div>
-		<main></main>
-		{# JavaScript #}
-		<script type="text/javascript" src="{{ site.url }}js/jquery.min.js"></script>
-		{# <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> #}
-		<script type="text/javascript" src="{{ site.url }}js/materialize.js"></script>
-		{# <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script> #}
-		<script type="text/javascript" src="{{ site.url }}js/main.js"></script>
-	</body>
-</html>
+{% extends 'page.njk' %}
+
+{% block content %}
+<div class="row">
+	<div class="col s12 l6 xl4 offset-l3 offset-xl4">
+		<input type="text" name="search" placeholder='"planet of the apes"' autofocus />
+	</div>
+</div>
+<main></main>
+{% endblock %}

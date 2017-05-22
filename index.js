@@ -78,6 +78,10 @@ app.get('/:extension(css|js)/materialize.*', (req, res) => {
 	// require('fs').createReadStream(path.join(__dirname, '/node_modules/materialize-css/bin/materialize.' + req.params.extension)).pipe(res);
 });
 
+app.get(/.*/, (req, res) => {
+	res.render('error.njk', config);
+});
+
 // Turn on listening
 app.listen(3000, function () {
 	console.log('Example app listening on port 3000!');
