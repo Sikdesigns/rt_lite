@@ -1,7 +1,7 @@
 {
   "name": "rt_lite",
   "version": "1.0.0",
-  "description": "A lightweight RottenTomatoes client",
+  "description": "A lightweight Rotten Tomatoes client",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
@@ -16,11 +16,17 @@
   ],
   "author": "Gabriel Benson",
   "license": "GPL-3.0",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gabeotisbenson/rt_lite.git"
+	},
+	"homepage": "https://github.com/gabeotisbenson/rt_lite#readme",
+	"bugs": {
+		"url": "https://github.com/gabeotisbenson/rt_lite/issues"
+	},
   "dependencies": {
-    "async": "^2.3.0",
     "express": "^4.15.2",
     "jquery": "^3.2.1",
-    "materialize-css": "^0.98.2",
     "morgan": "^1.8.1",
     "normalize.css": "^6.0.0",
     "nunjucks": "^3.0.0",

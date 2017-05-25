@@ -73,10 +73,12 @@ app.get('/js/jquery.min.js', (req, res) => {
 	res.sendFile(path.join(__dirname, '/node_modules/jquery/dist/jquery.min.js'));
 });
 
-app.get('/:extension(css|js)/materialize.*', (req, res) => {
-	res.sendFile(path.join(__dirname, '/node_modules/materialize-css/bin/materialize.' + req.params.extension));
-	// require('fs').createReadStream(path.join(__dirname, '/node_modules/materialize-css/bin/materialize.' + req.params.extension)).pipe(res);
-});
+// app.get('/test', (req, res) => {
+// 	res.render('test.njk', {
+// 		site: config.site,
+// 		movies: JSON.parse(fs.readFileSync('test.json')).movies
+// 	});
+// });
 
 app.get(/.*/, (req, res) => {
 	res.render('error.njk', config);
