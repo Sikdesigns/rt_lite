@@ -1,0 +1,215 @@
+{
+  "actorCount": 0,
+  "criticCount": 0,
+  "franchiseCount": 1,
+  "franchises": [{
+    "title": "Star Wars Saga",
+    "url": "/franchise/star_wars_saga",
+    "image": "https://resizing.flixster.com/imdOtGmgpD0slM_7LFDa0MzflzM=/fit-in/80x80/v1.bjs5NjYxNTg7ajsxNzMzNjsxMjAwOzYwMDsyNjI"
+  }],
+  "movieCount": 46,
+  "movies": [{
+    "name": "Star Wars: Episode III - Revenge of the Sith",
+    "year": 2005,
+    "url": "/m/star_wars_episode_iii_revenge_of_the_sith",
+    "image": "https://resizing.flixster.com/hCmXjUfr0_-d1pnrnnxZqCzxESs=/fit-in/80x80/v1.bTsxMjMwMzAzODtqOzE3MzMyOzEyMDA7NDgwOzcxMQ",
+    "meterClass": "certified_fresh",
+    "meterScore": 79,
+    "castItems": [{
+      "name": "Ewan McGregor",
+      "url": "/celebrity/ewan_mcgregor"
+    }, {
+      "name": "Natalie Portman",
+      "url": "/celebrity/natalie_portman"
+    }, {
+      "name": "Hayden Christensen",
+      "url": "/celebrity/hayden_christensen"
+    }],
+    "subline": "Ewan McGregor, Natalie Portman, Hayden Christensen, "
+  }, {
+    "name": "Star Wars: Episode I - The Phantom Menace",
+    "year": 1999,
+    "url": "/m/star_wars_episode_i_the_phantom_menace",
+    "image": "https://resizing.flixster.com/mFZHlb2lhdAuPs4yjovPtEQ8J8Y=/fit-in/80x80/v1.bTsxMjMwMzAzMztqOzE3MzMyOzEyMDA7NDgwOzcyMg",
+    "meterClass": "rotten",
+    "meterScore": 55,
+    "castItems": [{
+      "name": "Liam Neeson",
+      "url": "/celebrity/liam_neeson"
+    }, {
+      "name": "Ewan McGregor",
+      "url": "/celebrity/ewan_mcgregor"
+    }, {
+      "name": "Natalie Portman",
+      "url": "/celebrity/natalie_portman"
+    }],
+    "subline": "Liam Neeson, Ewan McGregor, Natalie Portman, "
+  }, {
+    "name": "Star Wars: Episode II - Attack of the Clones",
+    "year": 2002,
+    "url": "/m/star_wars_episode_ii_attack_of_the_clones",
+    "image": "https://resizing.flixster.com/7bu6fU2X_338mwN0sMOKEBuoixM=/fit-in/80x80/v1.bTsxMjMwMzAzNDtqOzE3MzMyOzEyMDA7NDgwOzcyNw",
+    "meterClass": "fresh",
+    "meterScore": 65,
+    "castItems": [{
+      "name": "Hayden Christensen",
+      "url": "/celebrity/hayden_christensen"
+    }, {
+      "name": "Natalie Portman",
+      "url": "/celebrity/natalie_portman"
+    }, {
+      "name": "Ewan McGregor",
+      "url": "/celebrity/ewan_mcgregor"
+    }],
+    "subline": "Hayden Christensen, Natalie Portman, Ewan McGregor, "
+  }, {
+    "name": "Star Wars: Episode IV - A New Hope",
+    "year": 1977,
+    "url": "/m/star_wars",
+    "image": "https://resizing.flixster.com/cgJ-aPfVvWGEG2jHWGElmJHoqJ8=/fit-in/80x80/v1.bTsxMjMwMzAzOTtqOzE3MzMyOzEyMDA7NDgwOzc1Ng",
+    "meterClass": "certified_fresh",
+    "meterScore": 93,
+    "castItems": [{
+      "name": "Mark Hamill",
+      "url": "/celebrity/mark_hamill"
+    }, {
+      "name": "Harrison Ford",
+      "url": "/celebrity/harrison_ford"
+    }, {
+      "name": "Carrie Fisher",
+      "url": "/celebrity/carrie_fisher"
+    }],
+    "subline": "Mark Hamill, Harrison Ford, Carrie Fisher, "
+  }, {
+    "name": "Star Wars: Episode VI - Return of the Jedi",
+    "year": 1983,
+    "url": "/m/star_wars_episode_vi_return_of_the_jedi",
+    "image": "https://resizing.flixster.com/6ySc1oIPzS4pkN1lhBWYAgy-d50=/fit-in/80x80/v1.bTsxMjMwMzA0MTtqOzE3MzMyOzEyMDA7NDgwOzc2Mw",
+    "meterClass": "certified_fresh",
+    "meterScore": 80,
+    "castItems": [{
+      "name": "Mark Hamill",
+      "url": "/celebrity/mark_hamill"
+    }, {
+      "name": "Carrie Fisher",
+      "url": "/celebrity/carrie_fisher"
+    }, {
+      "name": "Harrison Ford",
+      "url": "/celebrity/harrison_ford"
+    }],
+    "subline": "Mark Hamill, Carrie Fisher, Harrison Ford, "
+  }, {
+    "name": "Star Wars: Episode V - The Empire Strikes Back",
+    "year": 1980,
+    "url": "/m/empire_strikes_back",
+    "image": "https://resizing.flixster.com/uHItPvZwCLlRQ7NogXkjN8_NZJw=/fit-in/80x80/v1.bTsxMjMwMzA0MDtqOzE3MzMyOzEyMDA7NDgwOzc0Nw",
+    "meterClass": "certified_fresh",
+    "meterScore": 94,
+    "castItems": [{
+      "name": "Mark Hamill",
+      "url": "/celebrity/mark_hamill"
+    }, {
+      "name": "Harrison Ford",
+      "url": "/celebrity/harrison_ford"
+    }, {
+      "name": "Carrie Fisher",
+      "url": "/celebrity/carrie_fisher"
+    }],
+    "subline": "Mark Hamill, Harrison Ford, Carrie Fisher, "
+  }, {
+    "name": "Star Wars: The Clone Wars",
+    "year": 2008,
+    "url": "/m/clone_wars",
+    "image": "https://resizing.flixster.com/PHOf7cBFBTbgQW_u9HyzvcU0Vrg=/fit-in/80x80/v1.bTsxMTIwMzI0MTtqOzE3NDA5OzEyMDA7MTM2NDsyMDQ2",
+    "meterClass": "rotten",
+    "meterScore": 18,
+    "castItems": [{
+      "name": "Matt Lanter",
+      "url": "/celebrity/matt_lanter"
+    }, {
+      "name": "Ashley Eckstein",
+      "url": "/celebrity/ashley_drane"
+    }, {
+      "name": "James Arnold Taylor",
+      "url": "/celebrity/james_arnold_taylor"
+    }],
+    "subline": "Matt Lanter, Ashley Eckstein, James Arnold Taylor, "
+  }, {
+    "name": "Star Wars: Episode VII - The Force Awakens",
+    "year": 2015,
+    "url": "/m/star_wars_episode_vii_the_force_awakens",
+    "image": "https://resizing.flixster.com/BKibueXi4np98vQr82BtA0Ca1BI=/fit-in/80x80/v1.bTsxMTIwMzMwNjtqOzE3NDA5OzEyMDA7ODAwOzExODU",
+    "meterClass": "certified_fresh",
+    "meterScore": 92,
+    "castItems": [{
+      "name": "Daisy Ridley",
+      "url": "/celebrity/daisy_ridley"
+    }, {
+      "name": "John Boyega",
+      "url": "/celebrity/john_boyega"
+    }, {
+      "name": "Adam Driver",
+      "url": "/celebrity/adam_driver"
+    }],
+    "subline": "Daisy Ridley, John Boyega, Adam Driver, "
+  }, {
+    "name": "Star Wars: The Last Jedi",
+    "year": 2017,
+    "url": "/m/star_wars_the_last_jedi",
+    "image": "https://resizing.flixster.com/4PBmr9ks3-ySrMEFXT5eB8qz1Ms=/fit-in/80x80/v1.bTsxMjM4NDE5MDtqOzE3MzMzOzEyMDA7MTY4ODsyNTAw",
+    "meterClass": "N/A",
+    "castItems": [{
+      "name": "Daisy Ridley",
+      "url": "/celebrity/daisy_ridley"
+    }, {
+      "name": "Domhnall Gleeson",
+      "url": "/celebrity/domhnall_gleeson"
+    }, {
+      "name": "Adam Driver",
+      "url": "/celebrity/adam_driver"
+    }],
+    "subline": "Daisy Ridley, Domhnall Gleeson, Adam Driver, "
+  }, {
+    "name": "Rogue One: A Star Wars Story",
+    "year": 2016,
+    "url": "/m/rogue_one_a_star_wars_story",
+    "image": "https://resizing.flixster.com/7mF9PJoVKlZRrKn3nKRlo5Om9AU=/fit-in/80x80/v1.bTsxMjIzNzIxOTtwOzE3MzMxOzEyMDA7NzIwOzEwNjU",
+    "meterClass": "certified_fresh",
+    "meterScore": 85,
+    "castItems": [{
+      "name": "Felicity Jones",
+      "url": "/celebrity/felicity-jones"
+    }, {
+      "name": "Diego Luna",
+      "url": "/celebrity/diego_luna"
+    }, {
+      "name": "Mads Mikkelsen",
+      "url": "/celebrity/mads_mikkelsen"
+    }],
+    "subline": "Felicity Jones, Diego Luna, Mads Mikkelsen, "
+  }],
+  "tvCount": 3,
+  "tvSeries": [{
+    "title": "Star Wars: The Clone Wars",
+    "startYear": 2008,
+    "endYear": 2014,
+    "url": "/tv/star_wars_the_clone_wars",
+    "meterClass": "N/A",
+    "image": "https://resizing.flixster.com/uG23rx3UZG-SN9D-H8GUWjcdTyQ=/fit-in/80x80/v1.dDsxMDE0MDg7ajsxNzMyNjsxMjAwOzc4NjsxMDQ4"
+  }, {
+    "title": "Star Wars Rebels",
+    "startYear": 2014,
+    "endYear": 0,
+    "url": "/tv/star_wars_rebels",
+    "meterClass": "fresh",
+    "meterScore": 100,
+    "image": "https://resizing.flixster.com/mHFXlCwgmV6p1hc4i1sO5a4Hnho=/fit-in/80x80/v1.dDsxMzI5MDA7ajsxNzMyNjsxMjAwOzE1MzY7MjA0OA"
+  }, {
+    "title": "Star Wars: Clone Wars---'The Epic Micro Series'",
+    "startYear": 2003,
+    "endYear": 2005,
+    "url": "/tv/star_wars_clone_wars_the_epic_micro_series_",
+    "meterClass": "N/A",
+    "image": "https://resizing.flixster.com/Tno0HFl10h8IqCmRD_h22hpRSyE=/fit-in/80x80/v1.dDsyNTQyNTk7ajsxNzMyNzsxMjAwOzY4MDsxMDAw"
+  }]
+}
