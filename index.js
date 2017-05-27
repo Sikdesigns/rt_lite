@@ -17,7 +17,16 @@ const accessLogStream = rfs('access.log', {
 	interval: '1d',
 	path: logDirectory
 });
-app.use(morgan('combined', { stream: accessLogStream }));
+// app.use(morgan('combined', { stream: accessLogStream }));
+app.use(morgan((tokens, req, res) => {
+	return [
+		tokens.method(req, res),
+		tokens.url(req, res),
+		tokens.status(req, res)
+	];
+}, {
+	stream: accessLogStream
+}));
 
 // Turn on stylus autocompiling
 app.use(stylus.middleware({
@@ -30,7 +39,7 @@ app.use(stylus.middleware({
 // Get nunjucks going
 nunjucks.configure('views', {
 	autoescape: true,
-	noCache: true,
+	noCache: false,
 	express: app
 });
 
@@ -48,8 +57,7 @@ app.get('/film/:searchTerms', (req, res) => {
 	const searchTerms = req.params.searchTerms.replace(/%20/g, ' ');
 	request.get(rtURL + req.url.substring(6), { timeout: 5000 }, (err, response, html) => {
 		if (err || response.statusCode !== 200) {
-			res.render('oops.njk', config);
-			console.log(new Error(err));
+			res.status(response.statusCode).render('oops.njk', config);
 		} else if (response.statusCode === 200 && html.indexOf('Sorry, no results found') === -1) {
 			const anchorString = searchTerms + '\', ';
 			var searchData = html.substring(html.indexOf(anchorString) + anchorString.length);
@@ -81,10 +89,8 @@ app.get('/js/jquery.min.js', (req, res) => {
 // });
 
 app.get(/.*/, (req, res) => {
-	res.render('error.njk', config);
+	res.status(404).render('error.njk', config);
 });
 
 // Turn on listening
-app.listen(3000, function () {
-	console.log('Example app listening on port 3000!');
-});
+app.listen(3000);
