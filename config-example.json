@@ -1,6 +1,7 @@
 {
 	"site": {
 		"title": "rt_lite",
-		"url": "https://gabe.xyz/rt_lite/"
+		"url": "https://gabe.xyz/rt_lite/",
+		"devMode": false
 	}
 }
