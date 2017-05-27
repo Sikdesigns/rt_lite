@@ -1,6 +1,7 @@
 {
 	"site": {
 		"title": "rt_lite",
-		"url": ""
+		"url": "",
+		"devMode": true
 	}
 }

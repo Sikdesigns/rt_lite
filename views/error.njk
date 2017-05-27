@@ -1,9 +1,8 @@
 {% extends 'page.njk' %}
 
 {% block content %}
-<main class="row">
-	<div class="col s12 l6 xl4 offset-l3 offset-xl4">
-		<p>Oops, it looks like that page couldn't be found!</p>
-	</div>
+<main>
+	<h2 class="error-message">404</h2>
+	<p>Oops, it looks like that page couldn't be found! <a href="{{ site.url }}/">Take me to the search page</a>.</p>
 </main>
 {% endblock %}

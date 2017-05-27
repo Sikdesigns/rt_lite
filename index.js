@@ -9,14 +9,20 @@ const path = require('path');
 const request = require('request');
 const app = express();
 const rtURL = 'https://www.rottentomatoes.com/search/?search=';
+const util = require('util');
+
+// Load site configuration
+const config = JSON.parse(fs.readFileSync('config.json'));
 
 // Get logging going
-const logDirectory = path.join(__dirname, 'logs');
-fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
-const accessLogStream = rfs('access.log', {
+const rfsArgs = {
 	interval: '1d',
-	path: logDirectory
-});
+	path: path.join(__dirname, 'logs'),
+	compress: true
+};
+fs.existsSync(rfsArgs.path) || fs.mkdirSync(rfsArgs.path);
+const accessLogStream = rfs('access.log', rfsArgs);
+const errorLogStream = rfs('error.log', rfsArgs);
 // app.use(morgan('combined', { stream: accessLogStream }));
 app.use(morgan((tokens, req, res) => {
 	return [
@@ -39,15 +45,12 @@ app.use(stylus.middleware({
 // Get nunjucks going
 nunjucks.configure('views', {
 	autoescape: true,
-	noCache: false,
+	noCache: config.site.devMode,
 	express: app
 });
 
 // Turn on public folder
 app.use(express.static('public'));
-
-// Load site configuration
-const config = JSON.parse(fs.readFileSync('config.json'));
 
 app.get('/', (req, res) => {
 	res.render('index.njk', config);
@@ -57,6 +60,7 @@ app.get('/film/:searchTerms', (req, res) => {
 	const searchTerms = req.params.searchTerms.replace(/%20/g, ' ');
 	request.get(rtURL + req.url.substring(6), { timeout: 5000 }, (err, response, html) => {
 		if (err || response.statusCode !== 200) {
+			if (err) errorLogStream.pipe(util.inspect(err));
 			res.status(response.statusCode).render('oops.njk', config);
 		} else if (response.statusCode === 200 && html.indexOf('Sorry, no results found') === -1) {
 			const anchorString = searchTerms + '\', ';
