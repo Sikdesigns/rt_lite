@@ -2,6 +2,7 @@
 const express = require('express');
 const compression = require('compression');
 const minify = require('express-minify');
+const minifyHTML = require('express-minify-html');
 const morgan = require('morgan');
 const nunjucks = require('nunjucks');
 const stylus = require('stylus');
@@ -36,6 +37,7 @@ app.use(morgan((tokens, req, res) => {
 	stream: accessLogStream
 }));
 
+
 // Turn on stylus autocompiling
 app.use(stylus.middleware({
 	src: path.join(__dirname, '/resources'),
@@ -54,6 +56,18 @@ nunjucks.configure('views', {
 // Turn on compression, minify, and static folder
 app.use(compression());
 app.use(minify());
+app.use(minifyHTML({
+	override: true,
+	exception_url: false,
+	htmlMinifer: {
+		removeComments: true,
+		collapseWhitespace: true,
+		collapseBooleanAttributes: true,
+		removeAttributeQuotes: true,
+		removeEmptyAttributes: true,
+		minifyJS: true
+	}
+}));
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
