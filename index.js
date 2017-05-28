@@ -76,9 +76,9 @@ app.get('/', (req, res) => {
 app.get('/film/:searchTerms', (req, res) => {
 	const searchTerms = req.params.searchTerms.replace(/%20/g, ' ');
 	request.get(rtURL + req.url.substring(6), { timeout: 5000 }, (err, response, html) => {
-		if (err || response.statusCode !== 200) {
+		if (err || response.statusCode > 400) {
 			if (err) errorLogStream.pipe(util.inspect(err));
-			res.status(response.statusCode || 500).render('oops.njk', config);
+			res.render('oops.njk', config);
 		} else if (response.statusCode === 200 && html.indexOf('Sorry, no results found') === -1) {
 			const anchorString = searchTerms + '\', ';
 			var searchData = html.substring(html.indexOf(anchorString) + anchorString.length);
