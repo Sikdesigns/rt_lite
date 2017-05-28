@@ -37,7 +37,6 @@ app.use(morgan((tokens, req, res) => {
 	stream: accessLogStream
 }));
 
-
 // Turn on stylus autocompiling
 app.use(stylus.middleware({
 	src: path.join(__dirname, '/resources'),
@@ -57,7 +56,7 @@ nunjucks.configure('views', {
 app.use(compression());
 app.use(minify());
 app.use(minifyHTML({
-	override: true,
+	override: !config.site.devMode,
 	exception_url: false,
 	htmlMinifer: {
 		removeComments: true,

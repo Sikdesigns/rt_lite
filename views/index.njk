@@ -1,6 +1,7 @@
 {% extends 'page.njk' %}
 
 {% block content %}
-<input type="text" name="search" placeholder='"planet of the apes"' autofocus />
-<main></main>
+<label class="hidden" for="search">Search:</label>
+<input type="text" name="search" role="search" placeholder='"planet of the apes"' autofocus />
+<main role="main"></main>
 {% endblock %}
