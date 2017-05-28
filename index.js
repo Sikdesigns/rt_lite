@@ -1,5 +1,7 @@
 // Declare our needed variables
 const express = require('express');
+const compression = require('compression');
+const minify = require('express-minify');
 const morgan = require('morgan');
 const nunjucks = require('nunjucks');
 const stylus = require('stylus');
@@ -49,7 +51,9 @@ nunjucks.configure('views', {
 	express: app
 });
 
-// Turn on public folder
+// Turn on compression, minify, and static folder
+app.use(compression());
+app.use(minify());
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
@@ -61,7 +65,7 @@ app.get('/film/:searchTerms', (req, res) => {
 	request.get(rtURL + req.url.substring(6), { timeout: 5000 }, (err, response, html) => {
 		if (err || response.statusCode !== 200) {
 			if (err) errorLogStream.pipe(util.inspect(err));
-			res.status(response.statusCode).render('oops.njk', config);
+			res.status(response.statusCode || 500).render('oops.njk', config);
 		} else if (response.statusCode === 200 && html.indexOf('Sorry, no results found') === -1) {
 			const anchorString = searchTerms + '\', ';
 			var searchData = html.substring(html.indexOf(anchorString) + anchorString.length);
@@ -76,14 +80,14 @@ app.get('/film/:searchTerms', (req, res) => {
 	});
 });
 
-app.get('/css/normalize.min.css', (req, res) => {
-	// res.redirect('https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
-	res.sendFile(path.join(__dirname, '/node_modules/normalize.css/normalize.css'));
-});
+// app.get('/css/normalize.min.css', (req, res) => {
+// 	// res.redirect('https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
+// 	res.sendFile(path.join(__dirname, '/node_modules/normalize.css/normalize.css'));
+// });
 
-app.get('/js/jquery.min.js', (req, res) => {
-	res.sendFile(path.join(__dirname, '/node_modules/jquery/dist/jquery.min.js'));
-});
+// app.get('/js/jquery.min.js', (req, res) => {
+// 	res.sendFile(path.join(__dirname, '/node_modules/jquery/dist/jquery.min.js'));
+// });
 
 // app.get('/test', (req, res) => {
 // 	res.render('test.njk', {

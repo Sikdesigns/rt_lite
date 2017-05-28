@@ -16,19 +16,19 @@
   ],
   "author": "Gabriel Benson",
   "license": "GPL-3.0",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/gabeotisbenson/rt_lite.git"
-	},
-	"homepage": "https://github.com/gabeotisbenson/rt_lite#readme",
-	"bugs": {
-		"url": "https://github.com/gabeotisbenson/rt_lite/issues"
-	},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabeotisbenson/rt_lite.git"
+  },
+  "homepage": "https://github.com/gabeotisbenson/rt_lite#readme",
+  "bugs": {
+    "url": "https://github.com/gabeotisbenson/rt_lite/issues"
+  },
   "dependencies": {
+    "compression": "^1.6.2",
     "express": "^4.15.2",
-    "jquery": "^3.2.1",
+    "express-minify": "^0.2.0",
     "morgan": "^1.8.1",
-    "normalize.css": "^6.0.0",
     "nunjucks": "^3.0.0",
     "request": "^2.81.0",
     "rotating-file-stream": "^1.2.2",
