@@ -74,7 +74,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/film/:searchTerms', (req, res) => {
-	const searchTerms = req.params.searchTerms.replace(/%20/g, ' ').trim();
+	const searchTerms = req.params.searchTerms.trim().replace(/%20/g, ' ');
 	request.get(rtURL + req.url.substring(6), { timeout: 5000 }, (err, response, html) => {
 		if (err || response.statusCode > 400) {
 			if (err) errorLogStream.pipe(util.inspect(err));
