@@ -1,0 +1,14 @@
+<ul class="movie-list">
+	{% if movies.length > 0 %}
+		{% for movie in movies %}
+			<a href="https://www.rottentomatoes.com{{ movie.url }}">
+				<li class="movie-block {{ movie.meterClass if movie.meterClass !== "N/A" else "no-consensus" }}">
+					<span class="movie-title">{{ movie.name }} ({{ movie.year }})</span>
+					<span class="movie-score">{{ movie.meterScore }}</span>
+				</li>
+			</a>
+		{% endfor %}
+	{% else %}
+		<p>It looks like that search didn't turn up anything.  Maybe try something else?</p>
+	{% endif %}
+</ul>
