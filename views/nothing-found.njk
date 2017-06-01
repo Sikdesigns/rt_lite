@@ -1,5 +1,5 @@
 {% extends 'page.njk' %}
 
 {% block content %}
-	<p>It looks like that search didn't turn up anything.  Maybe try something else?</p>
+	{% include '_messages/no-results.njk' %}
 {% endblock %}

@@ -2,6 +2,11 @@
 	"site": {
 		"title": "rt_lite",
 		"url": "https://gabe.xyz/rt_lite/",
+		"admin": {
+			"name": "Gabriel Benson",
+			"email": "me@gabe.xyz",
+			"website": "https://gabe.xyz/"
+		},
 		"devMode": false
 	}
 }

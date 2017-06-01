@@ -78,7 +78,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-	getMovies(req.body.search.trim().replace(/%20/g, ' '), (err, movies) => {
+	getMovies(req.body.search, (err, movies) => {
 		if (err) {
 			res.render('no-response.njk', config);
 		} else {
@@ -92,21 +92,14 @@ app.post('/', (req, res) => {
 });
 
 app.get('/film/:searchTerms', (req, res) => {
-	const searchTerms = req.params.searchTerms.trim().replace(/%20/g, ' ');
-	request.get(rtURL + req.url.substring(6), { timeout: 5000 }, (err, response, html) => {
-		if (err || response.statusCode > 400) {
-			if (err) errorLogStream.pipe(util.inspect(err));
-			res.render('no-response.njk', config);
-		} else if (response.statusCode === 200 && html.indexOf('Sorry, no results found') === -1) {
-			const anchorString = searchTerms + '\', ';
-			var searchData = html.substring(html.indexOf(anchorString) + anchorString.length);
-			searchData = searchData.substring(0, searchData.indexOf(');'));
+	getMovies(req.params.searchTerms, (err, movies) => {
+		if (err) {
+			res.render('_messages/dead-line.njk', config);
+		} else {
 			res.render('_partials/result-list.njk', {
 				site: config.site,
-				movies: JSON.parse(searchData).movies
+				movies: movies
 			});
-		} else {
-			res.render('_partials/result-list.njk', config);
 		}
 	});
 });
@@ -119,6 +112,7 @@ app.all(/.*/, (req, res) => {
 app.listen(3000);
 
 function getMovies (searchTerms, callback) {
+	searchTerms = searchTerms.trim().replace(/%20/g, ' ');
 	request.get(rtURL + searchTerms, { timeout: 5000 }, (err, response, html) => {
 		if (response.statusCode === 200 && html.indexOf('Sorry, no results found') === -1) {
 			const anchorString = searchTerms + '\', ';
