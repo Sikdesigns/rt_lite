@@ -3,7 +3,7 @@
 	{% include '_partials/head.njk' %}
 	<body>
 		{% include '_partials/header.njk' %}
-		<form action="/" method="post">
+		<form action="{{ site.url }}" method="post">
 			<label class="hidden" for="search" aria-label="Search">Search:</label>
 			<input type="text" name="search" role="search" placeholder='"planet of the apes"' autofocus {% if searchTerms %}value="{{ searchTerms }}"{% endif %} />
 		</form>
