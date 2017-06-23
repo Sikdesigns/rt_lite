@@ -104,6 +104,10 @@ app.get('/film/:searchTerms', (req, res) => {
 	});
 });
 
+app.get('/privacy', (req, res) => {
+	res.render('privacy.njk', config);
+});
+
 app.all(/.*/, (req, res) => {
 	res.status(404).render('404.njk', config);
 });
