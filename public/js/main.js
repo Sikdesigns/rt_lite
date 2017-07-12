@@ -6,7 +6,7 @@
 $(document).ready(function () {
 	$('form').on('submit', function (e) {
 		$('input[name=search]').blur();
-		var searchTerms = $('input[name=search]').val().trim().replace(/\s/g, '-');
+		var searchTerms = $('input[name=search]').val().trim().replace(/\s/g, '-').replace(/'/g, '');
 		$.get(document.URL + (document.URL[document.URL.length - 1] === '/' ? '' : '/') + 'film/' + searchTerms, function (data) {
 			$('main').html(data);
 		});

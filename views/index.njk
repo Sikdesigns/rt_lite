@@ -1,0 +1,35 @@
+{% extends 'page.njk' %}
+
+{% block content %}
+	<h2>Movies Opening This Week</h2>
+	<ul class="movie-list">
+		{% if openingMovies.length > 0 %}
+			{% for movie in openingMovies %}
+				<a href="https://www.rottentomatoes.com{{ movie.url }}">
+					<li class="movie-block {{ movie.meterClass if movie.meterClass !== "N/A" else "no-consensus" }}">
+						<span class="movie-title">{{ movie.name }} {% if movie.year %}({{ movie.year }}){% endif %}</span>
+						<span class="movie-score">{{ movie.meterScore }}</span>
+					</li>
+				</a>
+			{% endfor %}
+		{% else %}
+			<p>It looks like that search didn't turn up anything.  Maybe try something else?</p>
+		{% endif %}
+	</ul>
+	<h2>Top Box Office</h2>
+	<ul class="movie-list">
+		{% if topBoxMovies.length > 0 %}
+			{% for movie in topBoxMovies %}
+				<a href="https://www.rottentomatoes.com{{ movie.url }}">
+					<li class="movie-block {{ movie.meterClass if movie.meterClass !== "N/A" else "no-consensus" }}">
+						<span class="movie-title">{{ movie.name }} {% if movie.year %}({{ movie.year }}){% endif %}</span>
+						<span class="movie-score">{{ movie.meterScore }}</span>
+					</li>
+				</a>
+			{% endfor %}
+		{% else %}
+			<p>It looks like that search didn't turn up anything.  Maybe try something else?</p>
+		{% endif %}
+	</ul>
+
+{% endblock %}
