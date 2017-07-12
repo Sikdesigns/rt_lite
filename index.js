@@ -30,6 +30,7 @@ function cacheMovies () {
 			var topBoxArr = [];
 			$('table#Opening.movie_list tbody tr').each(function (i, movie) {
 				var name = $('td.middle_col a', this).text();
+				var url = $('td.middle_col a', this).attr('href');
 				var meterScore = $('td.left_col a span.tMeterScore', this).text().replace('%', '');
 				var meterClass;
 				if (meterScore >= 60) {
@@ -41,12 +42,14 @@ function cacheMovies () {
 				}
 				openingArr[i] = {
 					name: name,
+					url: url,
 					meterScore: meterScore,
 					meterClass: meterClass
 				};
 			});
 			$('table#Top-Box-Office.movie_list tbody tr').each(function (i, movie) {
 				var name = $('td.middle_col a', this).text();
+				var url = $('td.middle_col a', this).attr('href');
 				var meterScore = $('td.left_col a span.tMeterScore', this).text().replace('%', '');
 				var meterClass;
 				if (meterScore >= 60) {
@@ -58,6 +61,7 @@ function cacheMovies () {
 				}
 				topBoxArr[i] = {
 					name: name,
+					url: url,
 					meterScore: meterScore,
 					meterClass: meterClass
 				};
