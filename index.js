@@ -13,7 +13,69 @@ const path = require('path');
 const request = require('request');
 const app = express();
 const rtURL = 'https://www.rottentomatoes.com/search/?search=';
-const util = require('util');
+
+// Set up caching of new and top box office movies from RT
+var openingMovies = JSON.parse(fs.readFileSync('openingMovies.json'));
+var topBoxMovies = JSON.parse(fs.readFileSync('topBoxMovies.json'));
+function cacheMovies () {
+	const cheerio = require('cheerio');
+	request('https://www.rottentomatoes.com/', (err, response, body) => {
+		if (err) {
+			fs.appendFile('logs/cache-error.log', err, (err) => {
+				if (err) console.error(new Error(err));
+			});
+		} else {
+			var $ = cheerio.load(body);
+			var openingArr = [];
+			var topBoxArr = [];
+			$('table#Opening.movie_list tbody tr').each(function (i, movie) {
+				var name = $('td.middle_col a', this).text();
+				var meterScore = $('td.left_col a span.tMeterScore', this).text().replace('%', '');
+				var meterClass;
+				if (meterScore >= 60) {
+					meterClass = 'fresh';
+				} else if (meterScore !== '') {
+					meterClass = 'rotten';
+				} else {
+					meterClass = 'no-consensus';
+				}
+				openingArr[i] = {
+					name: name,
+					meterScore: meterScore,
+					meterClass: meterClass
+				};
+			});
+			$('table#Top-Box-Office.movie_list tbody tr').each(function (i, movie) {
+				var name = $('td.middle_col a', this).text();
+				var meterScore = $('td.left_col a span.tMeterScore', this).text().replace('%', '');
+				var meterClass;
+				if (meterScore >= 60) {
+					meterClass = 'fresh';
+				} else if (meterScore !== '') {
+					meterClass = 'rotten';
+				} else {
+					meterClass = 'no-consensus';
+				}
+				topBoxArr[i] = {
+					name: name,
+					meterScore: meterScore,
+					meterClass: meterClass
+				};
+			});
+			fs.writeFile('openingMovies.json', JSON.stringify(openingArr), (err) => {
+				if (err) fs.appendFile('logs/cache-error.log', err);
+			});
+			openingMovies = openingArr;
+			fs.writeFile('topBoxMovies.json', JSON.stringify(topBoxArr), (err) => {
+				if (err) fs.appendFile('logs/cache-error.log', err);
+			});
+			topBoxMovies = topBoxArr;
+		}
+	});
+}
+cacheMovies();
+const schedule = require('node-schedule');
+schedule.scheduleJob('0 * * * *', cacheMovies);
 
 // Load site configuration
 const config = JSON.parse(fs.readFileSync('config.json'));
@@ -74,7 +136,11 @@ app.use(minifyHTML({
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-	res.render('page.njk', config);
+	res.render('index.njk', {
+		site: config.site,
+		openingMovies: openingMovies,
+		topBoxMovies: topBoxMovies
+	});
 });
 
 app.post('/', (req, res) => {
