@@ -202,7 +202,7 @@ app.all(/.*/, (req, res) => {
 });
 
 // Turn on listening
-app.listen(3000);
+app.listen(config.site.devMode ? config.site.port.dev : config.site.port.prod);
 
 function getMovies (searchTerms, callback) {
 	searchTerms = searchTerms.trim().replace(/%20/g, ' ');
