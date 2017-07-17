@@ -1,4 +1,4 @@
-// Declare our needed variables
+// Pull in needed modules
 const express = require('express');
 const bodyParser = require('body-parser');
 const compression = require('compression');
@@ -11,34 +11,55 @@ const fs = require('fs');
 const rfs = require('rotating-file-stream');
 const path = require('path');
 const request = require('request');
+const schedule = require('node-schedule');
 const app = express();
-const rtURL = 'https://www.rottentomatoes.com/search/?search=';
+
+// Define constants used
+const rtURL = 'https://www.rottentomatoes.com/';
+const rtSearchPostfix = 'search/?search=';
+const openingMoviesCacheFile = 'cache/openingMovies.json';
+const topBoxMoviesCacheFile = 'cache/topBoxMovies.json';
+const cacheErrorLogFile = 'logs/cache-error.log';
+const rtStruct = {
+	tableRow: {
+		opening: 'table#Opening.movie_list tbody tr',
+		topBox: 'table#Top-Box-Office.movie_list tbody tr'
+	},
+	name: 'td.middle_col a',
+	score: {
+		selector: 'td.left_col a span.tMeterScore',
+		middle: 60,
+		good: 'fresh',
+		bad: 'rotten',
+		ugly: 'no-consensus'
+	}
+};
 
 // Set up caching of new and top box office movies from RT
-var openingMovies = JSON.parse(fs.readFileSync('openingMovies.json'));
-var topBoxMovies = JSON.parse(fs.readFileSync('topBoxMovies.json'));
+var openingMovies = fs.existsSync(openingMoviesCacheFile) ? JSON.parse(fs.readFileSync(openingMoviesCacheFile)) : {};
+var topBoxMovies = fs.existsSync(topBoxMoviesCacheFile) ? JSON.parse(fs.readFileSync(topBoxMoviesCacheFile)) : {};
 function cacheMovies () {
 	const cheerio = require('cheerio');
-	request('https://www.rottentomatoes.com/', (err, response, body) => {
+	request(rtURL, (err, response, body) => {
 		if (err) {
-			fs.appendFile('logs/cache-error.log', err, (err) => {
+			fs.appendFile(cacheErrorLogFile, err, (err) => {
 				if (err) console.error(new Error(err));
 			});
 		} else {
 			var $ = cheerio.load(body);
 			var openingArr = [];
 			var topBoxArr = [];
-			$('table#Opening.movie_list tbody tr').each(function (i, movie) {
-				var name = $('td.middle_col a', this).text();
-				var url = $('td.middle_col a', this).attr('href');
-				var meterScore = $('td.left_col a span.tMeterScore', this).text().replace('%', '');
+			$(rtStruct.tableRow.opening).each(function (i, movie) {
+				var name = $(rtStruct.name, this).text();
+				var url = $(rtStruct.name, this).attr('href');
+				var meterScore = $(rtStruct.score.selector, this).text().replace('%', '');
 				var meterClass;
-				if (meterScore >= 60) {
-					meterClass = 'fresh';
+				if (meterScore >= rtStruct.score.middle) {
+					meterClass = rtStruct.score.good;
 				} else if (meterScore !== '') {
-					meterClass = 'rotten';
+					meterClass = rtStruct.score.bad;
 				} else {
-					meterClass = 'no-consensus';
+					meterClass = rtStruct.score.ugly;
 				}
 				openingArr[i] = {
 					name: name,
@@ -47,17 +68,17 @@ function cacheMovies () {
 					meterClass: meterClass
 				};
 			});
-			$('table#Top-Box-Office.movie_list tbody tr').each(function (i, movie) {
-				var name = $('td.middle_col a', this).text();
-				var url = $('td.middle_col a', this).attr('href');
-				var meterScore = $('td.left_col a span.tMeterScore', this).text().replace('%', '');
+			$(rtStruct.tableRow.topBox).each(function (i, movie) {
+				var name = $(rtStruct.name, this).text();
+				var url = $(rtStruct.name, this).attr('href');
+				var meterScore = $(rtStruct.score.selector, this).text().replace('%', '');
 				var meterClass;
-				if (meterScore >= 60) {
-					meterClass = 'fresh';
+				if (meterScore >= rtStruct.score.middle) {
+					meterClass = rtStruct.score.good;
 				} else if (meterScore !== '') {
-					meterClass = 'rotten';
+					meterClass = rtStruct.score.bad;
 				} else {
-					meterClass = 'no-consensus';
+					meterClass = rtStruct.score.ugly;
 				}
 				topBoxArr[i] = {
 					name: name,
@@ -66,19 +87,18 @@ function cacheMovies () {
 					meterClass: meterClass
 				};
 			});
-			fs.writeFile('openingMovies.json', JSON.stringify(openingArr), (err) => {
-				if (err) fs.appendFile('logs/cache-error.log', err);
+			fs.writeFile(openingMoviesCacheFile, JSON.stringify(openingArr), (err) => {
+				if (err) fs.appendFile(cacheErrorLogFile, err);
 			});
 			openingMovies = openingArr;
-			fs.writeFile('topBoxMovies.json', JSON.stringify(topBoxArr), (err) => {
-				if (err) fs.appendFile('logs/cache-error.log', err);
+			fs.writeFile(topBoxMoviesCacheFile, JSON.stringify(topBoxArr), (err) => {
+				if (err) fs.appendFile(cacheErrorLogFile, err);
 			});
 			topBoxMovies = topBoxArr;
 		}
 	});
 }
 cacheMovies();
-const schedule = require('node-schedule');
 schedule.scheduleJob('0 * * * *', cacheMovies);
 
 // Load site configuration
@@ -92,7 +112,6 @@ const rfsArgs = {
 };
 fs.existsSync(rfsArgs.path) || fs.mkdirSync(rfsArgs.path);
 const accessLogStream = rfs('access.log', rfsArgs);
-const errorLogStream = rfs('error.log', rfsArgs);
 // app.use(morgan('combined', { stream: accessLogStream }));
 app.use(morgan((tokens, req, res) => {
 	return [
@@ -183,11 +202,11 @@ app.all(/.*/, (req, res) => {
 });
 
 // Turn on listening
-app.listen(3000);
+app.listen(config.site.devMode ? config.site.port.dev : config.site.port.prod);
 
 function getMovies (searchTerms, callback) {
 	searchTerms = searchTerms.trim().replace(/%20/g, ' ');
-	request.get(rtURL + searchTerms, { timeout: 5000 }, (err, response, html) => {
+	request.get(rtURL + rtSearchPostfix + searchTerms, { timeout: 5000 }, (err, response, html) => {
 		if (response.statusCode === 200 && html.indexOf('Sorry, no results found') === -1) {
 			const anchorString = searchTerms + '\', ';
 			var searchData = html.substring(html.indexOf(anchorString) + anchorString.length);
