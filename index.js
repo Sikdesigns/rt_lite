@@ -106,7 +106,7 @@ const config = JSON.parse(fs.readFileSync('config.json'));
 
 // Get logging going
 const rfsArgs = {
-	interval: '1d',
+	interval: '7d',
 	path: path.join(__dirname, 'logs'),
 	compress: true
 };
